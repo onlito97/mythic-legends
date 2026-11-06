@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Signing values come from GitHub Secrets (env vars) or, on your own computer,
+// from a keystore.properties file next to settings.gradle (never commit that file).
+def keystoreProps = new Properties()
+def keystorePropsFile = rootProject.file('keystore.properties')
+if (keystorePropsFile.exists()) {
+    keystorePropsFile.withInputStream { keystoreProps.load(it) }
+}
+def cfg = { String propKey, String envKey -> System.getenv(envKey) ?: keystoreProps.getProperty(propKey) }
+
+// Every upload to Play needs a bigger versionCode. On GitHub it is the build number.
+def appVersionCode = (System.getenv('VERSION_CODE') ?: keystoreProps.getProperty('versionCode') ?: '1') as int
+
+android {
+    namespace 'ge.mythiclegends.idlerpg'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'ge.mythiclegends.idlerpg'
+        minSdk 24
+        targetSdk 36
+        versionCode appVersionCode
+        versionName "1.0.${appVersionCode}"
+
+        // AdMob ids live in gradle.properties (test ids by default)
+        manifestPlaceholders = [admobAppId: (project.findProperty('ADMOB_APP_ID') ?: 'ca-app-pub-3940256099942544~3347511713')]
+        resValue 'string', 'admob_rewarded_id', (project.findProperty('ADMOB_REWARDED_ID') ?: 'ca-app-pub-3940256099942544/5224354917')
+    }
+
+    signingConfigs {
+        release {
+            def ks = cfg('storeFile', 'KEYSTORE_FILE')
+            if (ks) {
+                storeFile rootProject.file(ks)
+                storePassword cfg('storePassword', 'KEYSTORE_PASSWORD')
+                keyAlias cfg('keyAlias', 'KEY_ALIAS')
+                keyPassword cfg('keyPassword', 'KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (signingConfigs.release.storeFile != null) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // Rewarded video ads
+    implementation 'com.google.android.gms:play-services-ads:24.9.0'
+    // Consent form (GDPR / US states) required by Google for ads
+    implementation 'com.google.android.ump:user-messaging-platform:4.0.0'
+}
