@@ -183,7 +183,16 @@ const ITEMS=[
 {id:'ruby_ring',name:'ლალის ბეჭედი',icon:'💍',slot:'ring',cls:'all',atk:3,def:1,gold:110,cry:0,max:30,gr:0.25,cg:1.3},
 {id:'sapphire_ring',name:'საფირონის ბეჭედი',icon:'🔷',slot:'ring',cls:'all',atk:100,mp:200,gold:2500,cry:5,max:30,gr:0.3,cg:1.38},
 {id:'leather_belt',name:'ტყავის ქამარი',icon:'🎗️',slot:'belt',cls:'all',def:2,hp:30,gold:95,cry:0,max:30,gr:0.25,cg:1.3},
-{id:'warlord_belt',name:'მხედართმთავრის ქამარი',icon:'⛓️',slot:'belt',cls:'all',def:150,hp:2500,gold:7000,cry:8,max:30,gr:0.3,cg:1.38}];
+{id:'warlord_belt',name:'მხედართმთავრის ქამარი',icon:'⛓️',slot:'belt',cls:'all',def:150,hp:2500,gold:7000,cry:8,max:30,gr:0.3,cg:1.38},
+{id:'phoenix_amulet',name:'ფენიქსის ამულეტი',icon:'🪶',slot:'amulet',cls:'knight',atk:4,hp:30,gold:130,cry:0,max:30,gr:0.25,cg:1.3},
+{id:'phoenix_ring',name:'ფენიქსის ბეჭედი',icon:'🔶',slot:'ring',cls:'knight',atk:4,def:1,gold:115,cry:0,max:30,gr:0.25,cg:1.3},
+{id:'phoenix_belt',name:'ფენიქსის სარტყელი',icon:'🧣',slot:'belt',cls:'knight',def:3,hp:35,gold:105,cry:0,max:30,gr:0.25,cg:1.3},
+{id:'astral_amulet',name:'ასტრალური მედალიონი',icon:'🔮',slot:'amulet',cls:'oracle',atk:60,hp:250,mp:200,gold:1400,cry:4,max:30,gr:0.3,cg:1.38},
+{id:'astral_ring',name:'ვარსკვლავური ბეჭედი',icon:'💫',slot:'ring',cls:'oracle',atk:70,mp:150,gold:1300,cry:3,max:30,gr:0.3,cg:1.38},
+{id:'astral_belt',name:'ასტრალური სარტყელი',icon:'🌙',slot:'belt',cls:'oracle',def:40,hp:300,mp:100,gold:1150,cry:3,max:30,gr:0.3,cg:1.38},
+{id:'titan_amulet',name:'ტიტანის გულსაკიდი',icon:'🪨',slot:'amulet',cls:'guardian',def:200,hp:3500,gold:11000,cry:12,max:25,gr:0.5,cg:1.6},
+{id:'titan_ring',name:'ტიტანის ბეჭედი',icon:'⚙️',slot:'ring',cls:'guardian',atk:300,def:150,gold:10000,cry:10,max:25,gr:0.5,cg:1.6},
+{id:'titan_belt',name:'ტიტანის სარტყელი',icon:'🪢',slot:'belt',cls:'guardian',def:250,hp:3000,gold:10500,cry:10,max:25,gr:0.5,cg:1.6}];
 const PRIZES=[['gold',20,'💰'],['crystals',10,'💎'],['gold',60,'💰'],['souls',1,'🌌'],['gold',150,'💰'],['crystals',35,'💎'],['gold',400,'💰'],['souls',3,'🌌']];
 const WHEEL_W=[26,14,18,4,12,8,6,2];let wheelUnit=15;
 const prizeAmt=p=>p[0]==='gold'?p[1]*wheelUnit:p[1];
@@ -193,9 +202,9 @@ const RAR=[['ჩვეულებრივი','text-slate-300'],['იშვი
 // FIX: ძველი ფორმულა it.max-ზე იყო მიბმული (20–30), ამიტომ ყველა ნივთი „ჩვეულებრივი“ გამოდიოდა
 const rarIdx=it=>it.gold<500?0:it.gold<5000?1:it.gold<20000?2:3;
 const SETS=[
-{n:'ფენიქსის სეტი',i:'🔥',p:['phoenix_sword','phoenix_armor','phoenix_helm','phoenix_gloves','phoenix_boots'],t:[[2,{atk:10}],[3,{def:15,hp:15}],[5,{atk:30,hp:30}]]},
-{n:'ასტრალური სეტი',i:'✨',p:['astral_wand','astral_mantle','astral_hood','astral_gloves','astral_slippers'],t:[[2,{mp:20}],[3,{atk:15}],[5,{atk:40,mp:20}]]},
-{n:'ტიტანის სეტი',i:'🛡️',p:['guardian_axe','titan_armor','guardian_helm','titan_gauntlet','titan_greaves'],t:[[2,{def:15}],[3,{hp:20}],[5,{def:40,hp:25}]]}];
+{n:'ფენიქსის სეტი',i:'🔥',p:['phoenix_sword','phoenix_armor','phoenix_helm','phoenix_gloves','phoenix_boots','phoenix_amulet','phoenix_ring','phoenix_belt'],t:[[2,{atk:10}],[4,{def:15,hp:15}],[6,{atk:25,hp:25}],[8,{atk:40,def:30,hp:30}]]},
+{n:'ასტრალური სეტი',i:'✨',p:['astral_wand','astral_mantle','astral_hood','astral_gloves','astral_slippers','astral_amulet','astral_ring','astral_belt'],t:[[2,{mp:20}],[4,{atk:30,mp:30}],[6,{atk:50,mp:50}],[8,{atk:80,def:60,mp:60}]]},
+{n:'ტიტანის სეტი',i:'🛡️',p:['guardian_axe','titan_armor','guardian_helm','titan_gauntlet','titan_greaves','titan_amulet','titan_ring','titan_belt'],t:[[2,{def:40}],[4,{def:60,hp:60}],[6,{def:100,hp:100}],[8,{atk:160,def:120,hp:120}]]}];
 const AVATARS=['🧙‍♂️','🥷','👑','🧝‍♀️','🧛‍♂️','🤖','🦁','🐉'];
 const ACHS=[['პირველი სისხლი',s=>s.kills>=1],['100 მონსტრი',s=>s.kills>=100],['ტალღა 10',s=>s.highestWave>=10],['ტალღა 30',s=>s.highestWave>=30],['პირველი სული',s=>s.souls>=1],['ყველა გმირი',s=>s.unlocked.length>=3]];
 const BOTS=[['ZeusX',48],['Medusa',36],['Titan_77',27],['NoobSlayer',14]];
@@ -630,7 +639,7 @@ function pushScore(force){
  lastPush=k;lastPushT=now;
  netDb.collection('board').doc(netId).set(boardDoc(now)).catch(()=>{lastPush='';$('net-status').textContent='👁️ მხოლოდ ნახვა'})}
 
-const TUT=[['⚔️','ბრძოლა','გმირი ავტომატურად იბრძვის წამში ერთხელ. მონსტრზე დაჭერა ან „ხელით შეტევა“ დამატებით ზიანს აყენებს, 🔥 დარტყმა მანის 10%-ს ხარჯავს და გმირის მიხედვით 2.5–3.5-ჯერ მეტ ზიანს აყენებს.'],['🏪','გაძლიერება','მონსტრებისგან ოქროს იღებთ. ჯერ მაღაზიაში იყიდეთ ხმალი და აბჯარი, შემდეგ „გმირები“-ში დონე აწიეთ. თუ გმირი დაეცა, ერთი ტალღით უკან დაბრუნდებით. მწვანე წერტილი ნავიგაციაში ნიშნავს, რომ რაღაცის აწევა შეგიძლიათ.'],['🎒','ინვენტარი და სეტები','8 სლოტი: ჩაფხუტი, ხელთათმანი, ჯავშანი, ფეხსაცმელი, იარაღი, სამკაული, ბეჭედი, ქამარი. სლოტზე დაჭერით ნახავთ ამ ტიპის ყველა ნივთს და შეადარებთ. ერთი სეტის 2, 3 და 5 ნივთი დამატებით ბონუსს იძლევა. x1/x10/x100/MAX ღილაკებით ერთბაშად რამდენიმე დონეს აწევთ.'],['👑','ბოსები და აღორძინება','ყოველ მე-5 ტალღაში ბოსია და კრისტალებს იძლევა 💎. 30-ე ტალღის მერე შეგიძლიათ აღორძინდეთ და მუდმივი 🌌 სულები მიიღოთ.'],['🎁','ყოველდღიური პრიზი','ბორბალი დღეში ერთხელ ტრიალდება. 📺 ერთი რეკლამა 3 საათით ჩართავს 2X ოქროს ან 2X დარტყმას, ბორბალს კი რეკლამით დღეში ერთხელ დამატებით დაატრიალებთ. ❓ ღილაკი ამ ინსტრუქციას ხელახლა გახსნის.']];
+const TUT=[['⚔️','ბრძოლა','გმირი ავტომატურად იბრძვის წამში ერთხელ. მონსტრზე დაჭერა ან „ხელით შეტევა“ დამატებით ზიანს აყენებს, 🔥 დარტყმა მანის 10%-ს ხარჯავს და გმირის მიხედვით 2.5–3.5-ჯერ მეტ ზიანს აყენებს.'],['🏪','გაძლიერება','მონსტრებისგან ოქროს იღებთ. ჯერ მაღაზიაში იყიდეთ ხმალი და აბჯარი, შემდეგ „გმირები“-ში დონე აწიეთ. თუ გმირი დაეცა, ერთი ტალღით უკან დაბრუნდებით. მწვანე წერტილი ნავიგაციაში ნიშნავს, რომ რაღაცის აწევა შეგიძლიათ.'],['🎒','ინვენტარი და სეტები','8 სლოტი: ჩაფხუტი, ხელთათმანი, ჯავშანი, ფეხსაცმელი, იარაღი, სამკაული, ბეჭედი, ქამარი. სლოტზე დაჭერით ნახავთ ამ ტიპის ყველა ნივთს და შეადარებთ. ერთი სეტის 2, 4, 6 და 8 ნივთი დამატებით ბონუსს იძლევა (ასტრალური სეტი ×2, ტიტანის ×4). x1/x10/x100/MAX ღილაკებით ერთბაშად რამდენიმე დონეს აწევთ.'],['👑','ბოსები და აღორძინება','ყოველ მე-5 ტალღაში ბოსია და კრისტალებს იძლევა 💎. 30-ე ტალღის მერე შეგიძლიათ აღორძინდეთ და მუდმივი 🌌 სულები მიიღოთ.'],['🎁','ყოველდღიური პრიზი','ბორბალი დღეში ერთხელ ტრიალდება. 📺 ერთი რეკლამა 3 საათით ჩართავს 2X ოქროს ან 2X დარტყმას, ბორბალს კი რეკლამით დღეში ერთხელ დამატებით დაატრიალებთ. ❓ ღილაკი ამ ინსტრუქციას ხელახლა გახსნის.']];
 let tutI=0;
 function showTut(){const t=TUT[tutI];$('tut-icon').textContent=t[0];$('tut-title').textContent=t[1];$('tut-text').textContent=t[2];$('tut-dots').innerHTML=TUT.map((_,i)=>`<span class="w-1.5 h-1.5 rounded-full ${i===tutI?'bg-amber-400':'bg-slate-700'}"></span>`).join('');$('tut-next').textContent=tutI===TUT.length-1?'დაწყება':'შემდეგი'}
 function openTut(){tutI=0;showTut();$('tut').classList.remove('hidden')}
@@ -711,7 +720,7 @@ const I18N_T={ // whole text templates (numbers replaced by {#}, same order in E
 'გმირი ავტომატურად იბრძვის წამში ერთხელ. მონსტრზე დაჭერა ან „ხელით შეტევა“ დამატებით ზიანს აყენებს, 🔥 დარტყმა მანის {#}%-ს ხარჯავს და გმირის მიხედვით {#}–{#}-ჯერ მეტ ზიანს აყენებს.':'Your hero attacks automatically once per second. Tapping the monster or “Attack” deals extra damage; 🔥 Strike costs {#}% mana and deals {#}–{#}× more damage depending on the hero.',
 'ბორბალი დღეში ერთხელ ტრიალდება. 📺 ერთი რეკლამა {#} საათით ჩართავს 2X ოქროს ან 2X დარტყმას, ბორბალს კი რეკლამით დღეში ერთხელ დამატებით დაატრიალებთ. ❓ ღილაკი ამ ინსტრუქციას ხელახლა გახსნის.':'The wheel spins once a day. 📺 One ad turns on 2X Gold or 2X Damage for {#} hours, and an ad also gives you one bonus wheel spin per day. ❓ opens this guide again.',
 'მონსტრებისგან ოქროს იღებთ. ჯერ მაღაზიაში იყიდეთ ხმალი და აბჯარი, შემდეგ „გმირები“-ში დონე აწიეთ. თუ გმირი დაეცა, ერთი ტალღით უკან დაბრუნდებით. მწვანე წერტილი ნავიგაციაში ნიშნავს, რომ რაღაცის აწევა შეგიძლიათ.':'Monsters drop gold. First buy a sword and armor in the Shop, then level up in “Heroes”. If your hero falls, you go back one wave. A green dot in the menu means you can upgrade something.',
-'{#} სლოტი: ჩაფხუტი, ხელთათმანი, ჯავშანი, ფეხსაცმელი, იარაღი, სამკაული, ბეჭედი, ქამარი. სლოტზე დაჭერით ნახავთ ამ ტიპის ყველა ნივთს და შეადარებთ. ერთი სეტის {#}, {#} და {#} ნივთი დამატებით ბონუსს იძლევა. x1/x10/x100/MAX ღილაკებით ერთბაშად რამდენიმე დონეს აწევთ.':'{#} slots: helmet, gloves, armor, boots, weapon, amulet, ring, belt. Tap a slot to see and compare every item of that type. {#}, {#} and {#} items of one set give extra bonuses. Use x1/x10/x100/MAX to buy several levels at once.',
+'{#} სლოტი: ჩაფხუტი, ხელთათმანი, ჯავშანი, ფეხსაცმელი, იარაღი, სამკაული, ბეჭედი, ქამარი. სლოტზე დაჭერით ნახავთ ამ ტიპის ყველა ნივთს და შეადარებთ. ერთი სეტის {#}, {#}, {#} და {#} ნივთი დამატებით ბონუსს იძლევა (ასტრალური სეტი ×{#}, ტიტანის ×{#}). x1/x10/x100/MAX ღილაკებით ერთბაშად რამდენიმე დონეს აწევთ.':'{#} slots: helmet, gloves, armor, boots, weapon, amulet, ring, belt. Tap a slot to see and compare every item of that type. {#}, {#}, {#} and {#} items of one set give extra bonuses (Astral set ×{#}, Titan ×{#}). Use x1/x10/x100/MAX to buy several levels at once.',
 'შეტევა (ATK) და დაცვა (DEF) ყველა გმირზე':'Attack (ATK) and defense (DEF) for all heroes',
 'ყოველი სული = {#}% · გაქვთ {#} 🌌':'Each soul = {#}% · you have {#} 🌌',
 'ახლა აღორძინებით მიიღებთ {#} 🌌, სულ {#}%':'Rebirth now gives {#} 🌌, total {#}%',
@@ -745,7 +754,7 @@ const I18N_W={ // words & phrases (longest match wins)
 'ტიტანის აბჯარი':'Titan Armor','ღმერთების გვირგვინი':'Crown of the Gods','ფენიქსის ჩაფხუტი':'Phoenix Helm','ასტრალური ქუდი':'Astral Hood','მცველის მუზარადი':"Guardian's Helm",
 'ფენიქსის ხელთათმანი':'Phoenix Gloves','ასტრალური ხელთათმანი':'Astral Gloves','ტიტანის მკლავსაკრავი':'Titan Gauntlets','ფენიქსის ჩექმა':'Phoenix Boots',
 'ასტრალური ფეხსაცმელი':'Astral Slippers','ტიტანის კოჭსაცმელი':'Titan Greaves','ნაკვერჩხლის ამულეტი':'Ember Amulet','მითიური ყელსაბამი':'Mythic Necklace',
-'ლალის ბეჭედი':'Ruby Ring','საფირონის ბეჭედი':'Sapphire Ring','ტყავის ქამარი':'Leather Belt','მხედართმთავრის ქამარი':"Warlord's Belt",
+'ლალის ბეჭედი':'Ruby Ring','საფირონის ბეჭედი':'Sapphire Ring','ტყავის ქამარი':'Leather Belt','მხედართმთავრის ქამარი':"Warlord's Belt",'ფენიქსის ამულეტი':'Phoenix Amulet','ფენიქსის ბეჭედი':'Phoenix Ring','ფენიქსის სარტყელი':'Phoenix Sash','ასტრალური მედალიონი':'Astral Medallion','ვარსკვლავური ბეჭედი':'Starry Ring','ასტრალური სარტყელი':'Astral Sash','ტიტანის გულსაკიდი':'Titan Pendant','ტიტანის ბეჭედი':'Titan Ring','ტიტანის სარტყელი':'Titan Girdle',
 'დრაკონის ბეჭედი':'Dragon Ring','ბედისწერის თვალი':'Eye of Fate','ოქროს გრაგნილი':'Golden Scroll','მანას სფერო':'Mana Orb','დროის საათი':'Hourglass','ფენიქსის ბუმბული':'Phoenix Feather',
 'სამუდამოდ':'permanently','ოქრო ყველა მონსტრზე':'gold from every monster','მაქს. MP და სწრაფი აღდგენა':'max MP and faster regen','მაქს.':'max','მაქს':'max','ოფლაინ ოქრო':'offline gold',
 'ერთხელ აცოცხლებს გმირს ბრძოლაში':'Revives the hero once per battle','და':'and',
