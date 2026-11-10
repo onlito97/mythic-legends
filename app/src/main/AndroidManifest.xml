@@ -3,6 +3,7 @@
 
     <!-- Needed for ads; the game itself runs offline from local files. -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
