@@ -190,7 +190,7 @@ public class MainActivity extends Activity {
                 });
     }
 
-    /** type is "gold", "atk" or "spin". The game gets onAdDone(type, earned, error) when the ad closes. */
+    /** type is "gold", "atk", "spin" or "reb". The game gets onAdDone(type, earned, error) when the ad closes. */
     private void showRewarded(String type) {
         RewardedAd ad = rewarded;
         if (ad == null) {
@@ -226,7 +226,7 @@ public class MainActivity extends Activity {
     private class AdBridge {
         @JavascriptInterface
         public void show(String type) {
-            if (!"gold".equals(type) && !"atk".equals(type) && !"spin".equals(type)) return;
+            if (!"gold".equals(type) && !"atk".equals(type) && !"spin".equals(type) && !"reb".equals(type)) return;
             main.post(() -> showRewarded(type));
         }
 
