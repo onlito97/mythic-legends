@@ -367,7 +367,18 @@ function stats(){
  return o}
 
 function startBattle(){clearTimeout(spT);clearTimeout(deathT);revived=false;dying=false;const s=stats();hp=s.maxHp;mp=s.maxMp;spawn();bars()}
+/* NEW v12: პირველი აღორძინების შემდეგ ერთი დარტყმით მოსაკლავი ტალღები ავტომატურად გამოიტოვება (ჯილდოებით). „🔒 ადგილზე“ რეჟიმში გამორთულია */
+function autoSkip(){if(S.hold||!(S.souls>0||S.lastReb>0))return 0; // მხოლოდ პირველი აღორძინების შემდეგ (დამწყები ჩვეულებრივ თამაშობს)
+ const s=stats();let n=0,g=0,c=0,so=0;const gm=goldMult();
+ while(n<5000){const w=S.wave,boss=w%5==0,m=monType(w),d=s.atk*(m[5]==='armor'?.75:1);if(!(d>=monHpAt(w,boss)))break;
+  g+=Math.round(bounty(w)*gm);S.kills++;S.wk.kills++;qAdd('kill');
+  if(boss){qAdd('boss');const first=w>S.soulWave;c+=Math.max(1,Math.round((4+Math.floor(w/5))*vmul('chest')*(first?1:.2)));if(first){const x=bossSouls();so+=x;S.runSouls+=x;S.soulWave=w}}
+  S.wave++;n++}
+ if(!n)return 0;S.gold+=g;S.crystals+=c;if(S.wave>S.highestWave)S.highestWave=S.wave;if(S.wave>S.wk.best)S.wk.best=S.wave;
+ const msg=`⚡ გამოტოვდა ${fmt(n)} ტალღა: +${fmt(g)}💰${c?` +${fmt(c)}💎`:''}${so?` +${fmt(so)}🌌`:''}`;
+ if(n>=3)toast(msg);log(msg);if(so)vib(60);save();head();return n}
 function spawn(){
+ autoSkip();
  const w=S.wave,m=monType(w),boss=w%5==0,cy=Math.floor((w-1)/8),mh=monHpAt(w,boss);
  mon={name:(boss?'👑 ':'')+m[0]+(cy?' ★'+cy:''),icon:m[1],max:mh,hp:mh,atk:monAtkAt(w,boss),bounty:bounty(w),boss,trait:m[5],tl:m[6],td:m[7],n:0};
  $('mon-box').style.opacity=1;drawMon();log(`⚔️ ${mon.name}!`)}
@@ -858,6 +869,9 @@ function renderBoard(){
  is translated on the fly: 1) whole sentence templates (numbers -> {#}), 2) rules, 3) word/phrase dictionary. */
 let LANG='ka';
 const I18N_T={ // whole text templates (numbers replaced by {#}, same order in English)
+'⚡ გამოტოვდა {#} ტალღა: {#}💰':'⚡ Skipped {#} waves: {#}💰',
+'⚡ გამოტოვდა {#} ტალღა: {#}💰 {#}💎':'⚡ Skipped {#} waves: {#}💰 {#}💎',
+'⚡ გამოტოვდა {#} ტალღა: {#}💰 {#}💎 {#}🌌':'⚡ Skipped {#} waves: {#}💰 {#}💎 {#}🌌',
 '⏳ {#}+ სულის შემდეგ აღორძინება {#} საათში ერთხელაა (შემდეგი: {#}:{#}:{#}). 📺 უყურეთ რეკლამას და აღორძინდით ახლავე (დღეში ერთხელ). აღორძინება: მიიღებთ {#} 🌌 სულს (სულ გექნებათ {#} 🌌, ძალა {#}%). ნივთები, დონეები და 💎 უნიკალური ნივთები ნულდება, გმირები, ცხოველები, ⭐ ვარსკვლავები, 🌌 სულები და კრისტალები რჩება.':'⏳ After {#}+ souls you can rebirth once every {#} hours (next: {#}:{#}:{#}). 📺 Watch an ad to rebirth now (once a day). Rebirth: you get {#} 🌌 souls (total {#} 🌌, power {#}%). Items, levels and 💎 unique items reset; heroes, pets, ⭐ stars, 🌌 souls and crystals stay.',
 '⏳ შემდეგი აღორძინება: {#}:{#}:{#}':'⏳ Next rebirth: {#}:{#}:{#}',
 '⏳ შემდეგი აღორძინება: {#}:{#}:{#} · 📺 ან ახლავე, რეკლამით':'⏳ Next rebirth: {#}:{#}:{#} · 📺 or now with an ad',
